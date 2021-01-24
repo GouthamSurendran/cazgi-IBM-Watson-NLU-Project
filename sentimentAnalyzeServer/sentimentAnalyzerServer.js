@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 
 app.get("/url/emotion", (req, res) => {
     const analyzeParams = {
-        'text': req.query.url,
+        'url': req.query.url,
         'features': {
             'emotion':{}
         },
@@ -43,6 +43,7 @@ app.get("/url/emotion", (req, res) => {
 
     NLUObject.analyze(analyzeParams)
         .then(analysisResults => {
+            console.log(analyzeParams);
             return res.send(analysisResults.result.emotion.document.emotion);
         })
         .catch(err => {
